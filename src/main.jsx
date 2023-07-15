@@ -1,11 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import HomePage from "./components/home/index.jsx";
+import NotFound from "./routes/notFound/index.jsx";
+
+import PhotoList, {
+  loader as PhotoListLoader,
+} from "./features/photoApp/components/photoList.jsx";
 import "./index.css";
-import NotFound from "./components/notFound/index.jsx";
-import PhotoList from "./features/photoApp/components/photoList.jsx";
-import PhotoTag from "./features/photoApp/pages/photoTravel/index.jsx";
+
+import HomePage from "./routes/home/homePage.jsx";
+import PhotoPage, {loader as photoPageLoader} from "./routes/photoPage/PhotoPage.jsx";
+import DetailPhoto, {loader as DetailPhotoLoader} from "./routes/deteilPhoto/detailPhoto.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -14,19 +20,26 @@ const router = createBrowserRouter([
     element: <HomePage />,
     errorElement: <NotFound />,
     children: [
-
       {
         path: "/",
         exact: true,
+        loader: PhotoListLoader,
         element: <PhotoList />,
       },
 
       {
-        path: "/photoList/:photoTag",
+        path: "/:photoTag",
         exact: true,
-        element: <PhotoTag />,
+        loader: photoPageLoader,
+        element: <PhotoPage />,
       },
 
+      {
+        path: "/:photoTag/:photoTagId",
+        exact: true,
+        loader: DetailPhotoLoader,
+        element: <DetailPhoto />,
+      }
     ],
   },
 ]);

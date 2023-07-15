@@ -1,10 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 HeaderComponent.propTypes = {};
 
 function HeaderComponent(props) {
+  let listNav = [
+    "travel",
+    "graphy",
+    "featured",
+    "lifestyle",
+  ];
   return (
     <header className="mx-5 py-3 justify-between items-center flex box-border md:py-6 xl:max-w-7xl xl:m-auto ">
       <div className="logo w-[50%]  object-cover md:w-[40%] xl:w-[20%]">
@@ -14,19 +19,14 @@ function HeaderComponent(props) {
       </div>
 
       <nav className="list__nav hidden xl:flex xl:gap-7 box-border">
-        <Link
-          to="/photoList/photoTravel"
-          className="uppercase flex gap-3 items-center font-medium text-sm hover:text-blue-600 cursor-pointer transition-colors delay-75 hover:font-medium"
-        >
-          travel <i className="fa-solid fa-angle-down"></i>
-        </Link>
-
-        <Link
-          to="/photoList/photoGraphy"
-          className="uppercase flex gap-3 items-center font-medium text-sm hover:text-blue-600 cursor-pointer transition-colors delay-75 hover:font-medium"
-        >
-          PhotoGraphy <i className="fa-solid fa-angle-down"></i>
-        </Link>
+        {listNav.map((itemNav) => (
+          <Link
+            to={`/${itemNav}`}
+            className="uppercase flex gap-3 items-center font-medium text-sm hover:text-blue-600 cursor-pointer transition-colors delay-75 hover:font-medium"
+          >
+            Photo {itemNav} <i className="fa-solid fa-angle-down"></i>
+          </Link>
+        ))}
       </nav>
 
       <div className="menu-mb xl:hidden">
